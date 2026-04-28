@@ -62,7 +62,7 @@ const IdeaForm = () => {
     const payload = { ...parsed.data, cover_image_url: parsed.data.cover_image_url || null, video_url: parsed.data.video_url || null };
     const res = editing
       ? await supabase.from("ideas").update(payload).eq("id", id!)
-      : await supabase.from("ideas").insert({ ...payload, user_id: user!.id });
+      : await supabase.from("ideas").insert({ ...payload, user_id: user!.id } as any);
     setLoading(false);
     if (res.error) toast.error(res.error.message);
     else { toast.success(editing ? "Updated" : "Pitch published"); navigate("/app/ideas"); }
