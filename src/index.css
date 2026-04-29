@@ -64,10 +64,10 @@
                      radial-gradient(600px 400px at 100% 100%, hsl(180 85% 60% / 0.10), transparent 60%);
 
     /* Shadows */
-    --shadow-elegant: 0 20px 60px -20px hsl(232 62% 32% / 0.25);
-    --shadow-glow: 0 0 40px hsl(232 80% 56% / 0.35);
-    --shadow-soft: 0 4px 16px -4px hsl(232 35% 12% / 0.08);
-    --shadow-card: 0 8px 28px -10px hsl(232 35% 12% / 0.12);
+    --shadow-elegant: 0 20px 60px -20px hsl(230 55% 16% / 0.28);
+    --shadow-glow: 0 0 40px hsl(158 78% 56% / 0.35);
+    --shadow-soft: 0 4px 16px -4px hsl(230 45% 10% / 0.08);
+    --shadow-card: 0 8px 28px -10px hsl(230 45% 10% / 0.12);
 
     /* Transitions */
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
