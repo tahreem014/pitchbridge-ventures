@@ -53,15 +53,15 @@
 
     --radius: 0.875rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(232 62% 22%), hsl(232 80% 48%));
-    --gradient-accent: linear-gradient(135deg, hsl(158 75% 32%), hsl(188 90% 52%));
-    --gradient-hero: radial-gradient(1200px 600px at 10% 0%, hsl(232 80% 56% / 0.25), transparent 60%),
-                     radial-gradient(900px 500px at 90% 20%, hsl(158 80% 52% / 0.2), transparent 60%),
-                     linear-gradient(180deg, hsl(232 62% 12%), hsl(232 55% 8%));
+    /* Gradients — deep navy → mint emerald */
+    --gradient-primary: linear-gradient(135deg, hsl(230 55% 12%), hsl(230 50% 22%));
+    --gradient-accent: linear-gradient(135deg, hsl(158 78% 50%), hsl(180 85% 60%));
+    --gradient-hero: radial-gradient(1200px 600px at 10% 0%, hsl(158 80% 52% / 0.18), transparent 60%),
+                     radial-gradient(900px 500px at 90% 20%, hsl(180 85% 60% / 0.14), transparent 60%),
+                     linear-gradient(180deg, hsl(230 55% 10%), hsl(230 55% 7%));
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100% / 0.8), hsl(0 0% 100% / 0.5));
-    --gradient-mesh: radial-gradient(600px 400px at 0% 0%, hsl(232 80% 56% / 0.12), transparent 60%),
-                     radial-gradient(600px 400px at 100% 100%, hsl(158 80% 52% / 0.12), transparent 60%);
+    --gradient-mesh: radial-gradient(600px 400px at 0% 0%, hsl(158 80% 52% / 0.10), transparent 60%),
+                     radial-gradient(600px 400px at 100% 100%, hsl(180 85% 60% / 0.10), transparent 60%);
 
     /* Shadows */
     --shadow-elegant: 0 20px 60px -20px hsl(232 62% 32% / 0.25);
