@@ -73,14 +73,14 @@
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     --transition-base: all 0.3s var(--ease-smooth);
 
-    --sidebar-background: 232 45% 10%;
-    --sidebar-foreground: 220 18% 80%;
-    --sidebar-primary: 158 75% 42%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 232 40% 16%;
+    --sidebar-background: 230 55% 10%;
+    --sidebar-foreground: 225 18% 80%;
+    --sidebar-primary: 158 78% 56%;
+    --sidebar-primary-foreground: 230 55% 10%;
+    --sidebar-accent: 230 50% 16%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 232 40% 18%;
-    --sidebar-ring: 188 90% 52%;
+    --sidebar-border: 230 45% 18%;
+    --sidebar-ring: 158 78% 56%;
   }
 
   .dark {
