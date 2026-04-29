@@ -4,9 +4,8 @@ import { Logo } from "@/components/Logo";
 import { useAuth } from "@/hooks/useAuth";
 import {
   ArrowRight, Sparkles, Shield, TrendingUp, Users, Zap, Globe, CheckCircle2,
-  BarChart3, MessageSquare, Search, Rocket,
+  BarChart3, MessageSquare, Search, Rocket, LineChart, DollarSign, Briefcase,
 } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
 
 const features = [
   { icon: Rocket, title: "Pitch in minutes", desc: "Beautiful idea pages with media, traction, and funding goals." },
@@ -51,9 +50,55 @@ const Landing = () => {
       </header>
 
       {/* Hero */}
-      <section className="relative hero-bg overflow-hidden">
-        <img src={heroImg} alt="" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      <section className="relative overflow-hidden bg-[hsl(230_55%_7%)]">
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.18]"
+          style={{
+            backgroundImage:
+              "linear-gradient(hsl(158 78% 56% / 0.12) 1px, transparent 1px), linear-gradient(90deg, hsl(158 78% 56% / 0.12) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage: "radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 80%)",
+          }}
+        />
+        {/* Glow orbs */}
+        <div className="absolute -top-32 -left-32 h-[520px] w-[520px] rounded-full bg-accent/25 blur-[120px] animate-float" />
+        <div className="absolute top-20 -right-32 h-[480px] w-[480px] rounded-full bg-highlight/20 blur-[120px] animate-float" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute bottom-0 left-1/3 h-[420px] w-[420px] rounded-full bg-primary-glow/30 blur-[120px]" />
+
+        {/* Floating ticker chips */}
+        <div className="hidden lg:block absolute top-32 left-10 glass-card !bg-white/5 !border-white/10 rounded-2xl p-3 pr-5 animate-float" style={{ animationDelay: "0.3s" }}>
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-gradient-accent flex items-center justify-center"><LineChart className="h-4 w-4 text-white" /></div>
+            <div>
+              <div className="text-xs text-white/60">Seed round closed</div>
+              <div className="text-sm font-semibold text-white">$2.4M · NovaAI</div>
+            </div>
+          </div>
+        </div>
+        <div className="hidden lg:block absolute top-48 right-10 glass-card !bg-white/5 !border-white/10 rounded-2xl p-3 pr-5 animate-float" style={{ animationDelay: "1.2s" }}>
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-gradient-accent flex items-center justify-center"><DollarSign className="h-4 w-4 text-white" /></div>
+            <div>
+              <div className="text-xs text-white/60">New investor match</div>
+              <div className="text-sm font-semibold text-white">Series A · ClimateTech</div>
+            </div>
+          </div>
+        </div>
+        <div className="hidden xl:block absolute bottom-44 left-16 glass-card !bg-white/5 !border-white/10 rounded-2xl p-3 pr-5 animate-float" style={{ animationDelay: "0.8s" }}>
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-gradient-accent flex items-center justify-center"><Briefcase className="h-4 w-4 text-white" /></div>
+            <div>
+              <div className="text-xs text-white/60">Pitch viewed</div>
+              <div className="text-sm font-semibold text-white">+128 investors today</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+
         <div className="container mx-auto pt-40 pb-32 relative">
           <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-xs mb-8">
