@@ -29,16 +29,16 @@
     --muted: 225 20% 96%;
     --muted-foreground: 225 14% 50%;
 
-    /* Mint emerald (from image accent #3CE6A5-ish) */
-    --accent: 158 78% 56%;
-    --accent-foreground: 230 55% 12%;
-    --accent-glow: 158 85% 64%;
+    /* Deep emerald green */
+    --accent: 158 75% 28%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 158 70% 38%;
 
-    /* Cyan highlight */
-    --highlight: 180 85% 60%;
-    --highlight-foreground: 230 45% 10%;
+    /* Forest highlight */
+    --highlight: 165 70% 32%;
+    --highlight-foreground: 0 0% 100%;
 
-    --success: 158 75% 38%;
+    --success: 158 75% 32%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
@@ -55,17 +55,17 @@
 
     /* Gradients — deep navy → mint emerald */
     --gradient-primary: linear-gradient(135deg, hsl(230 55% 12%), hsl(230 50% 22%));
-    --gradient-accent: linear-gradient(135deg, hsl(158 78% 50%), hsl(180 85% 60%));
-    --gradient-hero: radial-gradient(1200px 600px at 10% 0%, hsl(158 80% 52% / 0.18), transparent 60%),
-                     radial-gradient(900px 500px at 90% 20%, hsl(180 85% 60% / 0.14), transparent 60%),
+    --gradient-accent: linear-gradient(135deg, hsl(158 80% 22%), hsl(165 75% 34%));
+    --gradient-hero: radial-gradient(1200px 600px at 10% 0%, hsl(158 75% 28% / 0.22), transparent 60%),
+                     radial-gradient(900px 500px at 90% 20%, hsl(165 70% 32% / 0.18), transparent 60%),
                      linear-gradient(180deg, hsl(230 55% 10%), hsl(230 55% 7%));
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100% / 0.8), hsl(0 0% 100% / 0.5));
-    --gradient-mesh: radial-gradient(600px 400px at 0% 0%, hsl(158 80% 52% / 0.10), transparent 60%),
-                     radial-gradient(600px 400px at 100% 100%, hsl(180 85% 60% / 0.10), transparent 60%);
+    --gradient-mesh: radial-gradient(600px 400px at 0% 0%, hsl(158 75% 28% / 0.12), transparent 60%),
+                     radial-gradient(600px 400px at 100% 100%, hsl(165 70% 32% / 0.12), transparent 60%);
 
     /* Shadows */
     --shadow-elegant: 0 20px 60px -20px hsl(230 55% 16% / 0.28);
-    --shadow-glow: 0 0 40px hsl(158 78% 56% / 0.35);
+    --shadow-glow: 0 0 40px hsl(158 75% 28% / 0.45);
     --shadow-soft: 0 4px 16px -4px hsl(230 45% 10% / 0.08);
     --shadow-card: 0 8px 28px -10px hsl(230 45% 10% / 0.12);
 
@@ -75,12 +75,12 @@
 
     --sidebar-background: 230 55% 10%;
     --sidebar-foreground: 225 18% 80%;
-    --sidebar-primary: 158 78% 56%;
-    --sidebar-primary-foreground: 230 55% 10%;
+    --sidebar-primary: 158 75% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 230 50% 16%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 230 45% 18%;
-    --sidebar-ring: 158 78% 56%;
+    --sidebar-ring: 158 75% 32%;
   }
 
   .dark {
@@ -93,9 +93,9 @@
     --popover: 230 50% 11%;
     --popover-foreground: 220 20% 96%;
 
-    --primary: 158 78% 56%;
-    --primary-foreground: 230 55% 8%;
-    --primary-glow: 158 85% 64%;
+    --primary: 158 75% 32%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 158 70% 42%;
 
     --secondary: 230 35% 18%;
     --secondary-foreground: 220 20% 96%;
@@ -103,30 +103,30 @@
     --muted: 230 35% 14%;
     --muted-foreground: 225 14% 68%;
 
-    --accent: 158 78% 56%;
-    --accent-foreground: 230 55% 8%;
-    --accent-glow: 158 85% 64%;
+    --accent: 158 75% 32%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 158 70% 42%;
 
-    --highlight: 180 85% 62%;
-    --highlight-foreground: 230 55% 8%;
+    --highlight: 165 70% 36%;
+    --highlight-foreground: 0 0% 100%;
 
-    --success: 158 78% 56%;
+    --success: 158 75% 36%;
     --warning: 38 92% 60%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 230 35% 20%;
     --input: 230 35% 18%;
-    --ring: 158 78% 56%;
+    --ring: 158 75% 32%;
 
     --gradient-primary: linear-gradient(135deg, hsl(230 55% 12%), hsl(230 50% 22%));
-    --gradient-accent: linear-gradient(135deg, hsl(158 78% 50%), hsl(180 85% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(158 80% 22%), hsl(165 75% 34%));
     --gradient-card: linear-gradient(180deg, hsl(230 50% 13% / 0.8), hsl(230 50% 11% / 0.6));
 
     --sidebar-background: 230 55% 6%;
     --sidebar-foreground: 225 18% 78%;
-    --sidebar-primary: 158 78% 56%;
-    --sidebar-primary-foreground: 230 55% 7%;
+    --sidebar-primary: 158 75% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 230 50% 12%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 230 45% 14%;
