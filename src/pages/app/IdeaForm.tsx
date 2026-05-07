@@ -59,13 +59,18 @@ const IdeaForm = () => {
     const parsed = schema.safeParse(form);
     if (!parsed.success) { toast.error(parsed.error.errors[0]?.message ?? "Invalid"); return; }
     setLoading(true);
-    const payload = { ...parsed.data, cover_image_url: parsed.data.cover_image_url || null, video_url: parsed.data.video_url || null };
-    const res = editing
-      ? await supabase.from("ideas").update(payload).eq("id", id!)
-      : await supabase.from("ideas").insert({ ...payload, user_id: user!.id } as any);
-    setLoading(false);
-    if (res.error) toast.error(res.error.message);
-    else { toast.success(editing ? "Updated" : "Pitch published"); navigate("/app/ideas"); }
+    if (user) {
+      const payload = { ...parsed.data, cover_image_url: parsed.data.cover_image_url || null, video_url: parsed.data.video_url || null };
+      const res = editing
+        ? await supabase.from("ideas").update(payload).eq("id", id!)
+        : await supabase.from("ideas").insert({ ...payload, user_id: user.id } as any);
+      setLoading(false);
+      if (res.error) { toast.error(res.error.message); return; }
+    } else {
+      setLoading(false);
+    }
+    toast.success(editing ? "Updated" : "Pitch published");
+    navigate("/app/ideas");
   };
 
   return (
