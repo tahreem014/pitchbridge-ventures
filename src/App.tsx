@@ -6,7 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import { RequireAuth } from "@/components/RequireAuth";
 import Landing from "./pages/Landing";
-import Auth from "./pages/Auth";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
 import Pricing from "./pages/Pricing";
@@ -34,7 +35,8 @@ const App = () => (
             <Route path="/explore" element={<Explore />} />
             <Route path="/about" element={<About />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
 
             <Route path="/app" element={<Dashboard />} />
             <Route path="/app/profile" element={<Profile />} />

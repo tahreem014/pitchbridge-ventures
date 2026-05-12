@@ -45,7 +45,7 @@ const Explore = () => {
             <Link to="/about" className="text-muted-foreground hover:text-foreground">About</Link>
             <Link to="/pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link>
           </nav>
-          <Button onClick={() => navigate(user ? "/app" : "/auth")} className="bg-gradient-primary">{user ? "Open app" : "Sign in"}</Button>
+          <Button onClick={() => navigate(user ? "/app" : "/login")} className="bg-gradient-primary">{user ? "Open app" : "Sign in"}</Button>
         </div>
       </header>
 
@@ -82,7 +82,7 @@ const Explore = () => {
           ) : ideas.length === 0 ? (
             <div className="text-center py-24 text-muted-foreground">
               <div className="font-display text-xl mb-2">No ideas found yet</div>
-              <p className="text-sm">Try adjusting filters, or be the first to <Link to="/auth?mode=signup&role=entrepreneur" className="text-primary underline">post your pitch</Link>.</p>
+              <p className="text-sm">Try adjusting filters, or be the first to <Link to="/signup?role=entrepreneur" className="text-primary underline">post your pitch</Link>.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
