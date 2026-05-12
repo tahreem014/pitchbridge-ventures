@@ -41,8 +41,8 @@ const Landing = () => {
               <Button onClick={() => navigate("/app")} className="bg-white text-primary hover:bg-white/90">Open app</Button>
             ) : (
               <>
-                <Link to="/auth" className="text-sm text-white/80 hover:text-white hidden sm:inline">Sign in</Link>
-                <Button onClick={() => navigate("/auth?mode=signup")} className="bg-white text-primary hover:bg-white/90">Get started</Button>
+                <Link to="/login" className="text-sm text-white/80 hover:text-white hidden sm:inline">Sign in</Link>
+                <Button onClick={() => navigate("/signup")} className="bg-white text-primary hover:bg-white/90">Get started</Button>
               </>
             )}
           </div>
@@ -113,7 +113,7 @@ const Landing = () => {
               PitchBridge connects ambitious entrepreneurs with active investors. Pitch your vision, discover breakthrough startups, and close deals in one elegant workspace.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-              <Button size="lg" onClick={() => navigate("/auth?mode=signup&role=entrepreneur")} className="bg-gradient-accent hover:opacity-90 text-white shadow-glow text-base h-12 px-7">
+              <Button size="lg" onClick={() => navigate("/signup?role=entrepreneur")} className="bg-gradient-accent hover:opacity-90 text-white shadow-glow text-base h-12 px-7">
                 Pitch Your Idea <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline" onClick={() => navigate("/explore")} className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white text-base h-12 px-7 backdrop-blur-md">
@@ -173,10 +173,10 @@ const Landing = () => {
               <h2 className="font-display text-3xl md:text-5xl font-bold text-white text-balance">Your next venture starts here</h2>
               <p className="mt-4 text-white/80 max-w-xl mx-auto">Join thousands of founders and investors moving capital into bold ideas.</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="lg" onClick={() => navigate("/auth?mode=signup&role=entrepreneur")} className="bg-white text-primary hover:bg-white/90 h-12 px-7">
+                <Button size="lg" onClick={() => navigate("/signup?role=entrepreneur")} className="bg-white text-primary hover:bg-white/90 h-12 px-7">
                   I'm a Founder <Rocket className="ml-1 h-4 w-4" />
                 </Button>
-                <Button size="lg" onClick={() => navigate("/auth?mode=signup&role=investor")} variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white h-12 px-7">
+                <Button size="lg" onClick={() => navigate("/signup?role=investor")} variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white h-12 px-7">
                   I'm an Investor <TrendingUp className="ml-1 h-4 w-4" />
                 </Button>
               </div>
