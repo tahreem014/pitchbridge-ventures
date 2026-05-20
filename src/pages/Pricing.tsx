@@ -42,7 +42,7 @@ const Pricing = () => (
           <Link to="/about" className="text-muted-foreground hover:text-foreground">About</Link>
           <Link to="/pricing" className="text-foreground font-medium">Pricing</Link>
         </nav>
-        <Link to="/login"><Button className="bg-gradient-primary">Sign in</Button></Link>
+        <Link to="/auth"><Button className="bg-gradient-primary">Sign in</Button></Link>
       </div>
     </header>
 
@@ -70,7 +70,7 @@ const Pricing = () => (
                 </li>
               ))}
             </ul>
-            <Link to="/signup"><Button className={`w-full mt-8 h-11 ${t.highlight ? "bg-white text-primary hover:bg-white/90" : "bg-gradient-primary"}`}>{t.cta}</Button></Link>
+            <Link to="/auth?mode=signup"><Button className={`w-full mt-8 h-11 ${t.highlight ? "bg-white text-primary hover:bg-white/90" : "bg-gradient-primary"}`}>{t.cta}</Button></Link>
           </div>
         ))}
       </div>

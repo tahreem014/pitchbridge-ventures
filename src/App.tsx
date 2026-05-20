@@ -6,8 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import { RequireAuth } from "@/components/RequireAuth";
 import Landing from "./pages/Landing";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Auth from "./pages/Auth";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
 import Pricing from "./pages/Pricing";
@@ -35,21 +34,20 @@ const App = () => (
             <Route path="/explore" element={<Explore />} />
             <Route path="/about" element={<About />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/auth" element={<Auth />} />
 
-            <Route path="/app" element={<Dashboard />} />
-            <Route path="/app/profile" element={<Profile />} />
-            <Route path="/app/ideas" element={<MyIdeas />} />
-            <Route path="/app/ideas/new" element={<IdeaForm />} />
-            <Route path="/app/ideas/:id/edit" element={<IdeaForm />} />
-            <Route path="/app/ideas/:id" element={<IdeaDetail />} />
-            <Route path="/app/discover" element={<Discover />} />
-            <Route path="/app/saved" element={<Saved />} />
-            <Route path="/app/messages" element={<Messages />} />
-            <Route path="/app/proposals" element={<Proposals />} />
-            <Route path="/app/analytics" element={<Analytics />} />
-            <Route path="/app/portfolio" element={<Portfolio />} />
+            <Route path="/app" element={<RequireAuth><Dashboard /></RequireAuth>} />
+            <Route path="/app/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+            <Route path="/app/ideas" element={<RequireAuth roles={["entrepreneur","admin"]}><MyIdeas /></RequireAuth>} />
+            <Route path="/app/ideas/new" element={<RequireAuth roles={["entrepreneur","admin"]}><IdeaForm /></RequireAuth>} />
+            <Route path="/app/ideas/:id/edit" element={<RequireAuth roles={["entrepreneur","admin"]}><IdeaForm /></RequireAuth>} />
+            <Route path="/app/ideas/:id" element={<RequireAuth><IdeaDetail /></RequireAuth>} />
+            <Route path="/app/discover" element={<RequireAuth><Discover /></RequireAuth>} />
+            <Route path="/app/saved" element={<RequireAuth><Saved /></RequireAuth>} />
+            <Route path="/app/messages" element={<RequireAuth><Messages /></RequireAuth>} />
+            <Route path="/app/proposals" element={<RequireAuth><Proposals /></RequireAuth>} />
+            <Route path="/app/analytics" element={<RequireAuth><Analytics /></RequireAuth>} />
+            <Route path="/app/portfolio" element={<RequireAuth roles={["investor","admin"]}><Portfolio /></RequireAuth>} />
             <Route path="/app/admin/users" element={<RequireAuth roles={["admin"]}><AdminUsers /></RequireAuth>} />
             <Route path="/app/admin/ideas" element={<RequireAuth roles={["admin"]}><AdminIdeas /></RequireAuth>} />
             <Route path="/app/admin/reports" element={<RequireAuth roles={["admin"]}><AdminReports /></RequireAuth>} />

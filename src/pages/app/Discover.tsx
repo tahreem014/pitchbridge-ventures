@@ -1,31 +1,52 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { IdeaCardItem } from "@/components/IdeaCardItem";
-import { sampleIdeas } from "@/lib/sampleData";
 import { toast } from "sonner";
 
 const CATEGORIES = ["All", "AI / ML", "FinTech", "HealthTech", "ClimateTech", "SaaS", "Consumer", "Marketplace", "DeepTech", "Web3"];
 const STAGES = ["All", "idea", "prototype", "mvp", "early_revenue", "scaling"];
 
 const Discover = () => {
+  const { user } = useAuth();
+  const [ideas, setIdeas] = useState<any[]>([]);
   const [favs, setFavs] = useState<Set<string>>(new Set());
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [stage, setStage] = useState("All");
 
-  const ideas = useMemo(() => sampleIdeas.filter(i =>
-    (category === "All" || i.category === category) &&
-    (stage === "All" || i.stage === stage) &&
-    (!search || i.title.toLowerCase().includes(search.toLowerCase()))
-  ), [search, category, stage]);
+  useEffect(() => {
+    let cancel = false;
+    (async () => {
+      let q = supabase.from("ideas").select("*").eq("status", "published").eq("visibility", "public").order("created_at", { ascending: false });
+      if (category !== "All") q = q.eq("category", category);
+      if (stage !== "All") q = q.eq("stage", stage as any);
+      if (search) q = q.ilike("title", `%${search}%`);
+      const { data } = await q;
+      if (cancel) return;
+      setIdeas(data ?? []);
+      if (user) {
+        const { data: f } = await supabase.from("favorites").select("idea_id").eq("user_id", user.id);
+        setFavs(new Set((f ?? []).map(x => x.idea_id)));
+      }
+    })();
+    return () => { cancel = true; };
+  }, [search, category, stage, user]);
 
-  const toggleFav = (id: string) => {
-    const n = new Set(favs);
-    if (n.has(id)) n.delete(id); else { n.add(id); toast.success("Saved"); }
-    setFavs(n);
+  const toggleFav = async (id: string) => {
+    if (!user) return;
+    if (favs.has(id)) {
+      await supabase.from("favorites").delete().eq("idea_id", id).eq("user_id", user.id);
+      const n = new Set(favs); n.delete(id); setFavs(n);
+    } else {
+      await supabase.from("favorites").insert({ idea_id: id, user_id: user.id });
+      setFavs(new Set([...favs, id]));
+      toast.success("Saved");
+    }
   };
 
   return (

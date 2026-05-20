@@ -20,7 +20,7 @@ const About = () => (
           <Link to="/about" className="text-foreground font-medium">About</Link>
           <Link to="/pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link>
         </nav>
-        <Link to="/login"><Button className="bg-gradient-primary">Sign in</Button></Link>
+        <Link to="/auth"><Button className="bg-gradient-primary">Sign in</Button></Link>
       </div>
     </header>
 
@@ -47,7 +47,7 @@ const About = () => (
       <div className="container mx-auto text-center max-w-2xl">
         <h2 className="font-display text-3xl md:text-4xl font-bold gradient-text-primary">Backed by a global community of operators and angels</h2>
         <p className="mt-4 text-muted-foreground">Hundreds of millions in capital tracked. Thousands of meaningful introductions made.</p>
-        <Link to="/signup"><Button size="lg" className="mt-8 bg-gradient-primary h-12 px-7">Join PitchBridge</Button></Link>
+        <Link to="/auth?mode=signup"><Button size="lg" className="mt-8 bg-gradient-primary h-12 px-7">Join PitchBridge</Button></Link>
       </div>
     </section>
   </div>
