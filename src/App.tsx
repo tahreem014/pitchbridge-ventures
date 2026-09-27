@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { RequireAuth } from "@/components/RequireAuth";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
 import Pricing from "./pages/Pricing";
@@ -34,7 +35,8 @@ const App = () => (
             <Route path="/explore" element={<Explore />} />
             <Route path="/about" element={<About />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/auth" element={<Auth />} />
+<Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
             <Route path="/app" element={<RequireAuth><Dashboard /></RequireAuth>} />
             <Route path="/app/profile" element={<RequireAuth><Profile /></RequireAuth>} />
