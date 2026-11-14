@@ -7,6 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/hooks/useAuth";
+import { SendProposalDialog } from "@/components/SendProposalDialog";
+import { PitchAccessCard } from "@/components/pitch/PitchAccessCard";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { displayName, initialsOf } from "@/lib/messages";
 import { Heart, MessageSquare, Send, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
@@ -17,6 +21,7 @@ const IdeaDetail = () => {
   const [idea, setIdea] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [isFav, setIsFav] = useState(false);
+  const [proposalOpen, setProposalOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -32,6 +37,14 @@ const IdeaDetail = () => {
     })();
   }, [id, user]);
 
+  // Counts as a view in the founder's analytics. The database keeps it to one per viewer per day
+  // and ignores the founder's own visits, so this is safe to call every time the page opens.
+  const viewerId = user?.id;
+  useEffect(() => {
+    if (!id || !viewerId) return;
+    supabase.rpc("record_idea_view", { _idea_id: id }).then(() => {}, () => {});
+  }, [id, viewerId]);
+
   const toggleFav = async () => {
     if (!user) return navigate("/auth");
     if (isFav) {
@@ -44,15 +57,18 @@ const IdeaDetail = () => {
     }
   };
 
-  const sendProposal = async () => {
+  const sendProposal = () => {
     if (!user) return navigate("/auth");
-    const amt = prompt("Proposed investment (USD):");
-    if (!amt) return;
-    const { error } = await supabase.from("proposals").insert({
-      idea_id: id!, investor_id: user.id, entrepreneur_id: idea.user_id,
-      amount: Number(amt), message: "Interested in discussing further.",
+    setProposalOpen(true);
+  };
+
+  // Opens the conversation with the founder; a first message is pre-filled for a brand-new chat.
+  const messageFounder = () => {
+    if (!user) return navigate("/auth");
+    const firstName = profile?.full_name?.trim().split(/\s+/)[0];
+    navigate(`/app/messages?with=${idea.user_id}`, {
+      state: { draft: `Hi${firstName ? ` ${firstName}` : ""}, I came across ${idea.title} on PitchBridge and would love to learn more.` },
     });
-    if (error) toast.error(error.message); else toast.success("Proposal sent");
   };
 
   if (!idea) return <AppShell title="Idea"><div className="p-8 text-muted-foreground">Loading…</div></AppShell>;
@@ -104,14 +120,29 @@ const IdeaDetail = () => {
               {idea.equity_offered && <div className="mt-3 text-sm">Equity offered: <span className="font-semibold">{idea.equity_offered}%</span></div>}
             </Card>
             <Card className="glass-card p-6">
-              <div className="text-xs text-muted-foreground mb-2">Founder</div>
-              <div className="font-semibold">{profile?.full_name ?? "Founder"}</div>
-              {profile?.headline && <div className="text-xs text-muted-foreground">{profile.headline}</div>}
-              <Button variant="outline" className="w-full mt-4" size="sm"><MessageSquare className="h-3.5 w-3.5 mr-1" /> Message</Button>
+              <div className="text-xs text-muted-foreground mb-3">Founder</div>
+              <div className="flex items-center gap-3">
+                <Avatar className="h-11 w-11 flex-shrink-0">
+                  {profile?.avatar_url && <AvatarImage src={profile.avatar_url} alt={profile.full_name ?? "Founder"} />}
+                  <AvatarFallback className="bg-gradient-primary text-white text-sm">{initialsOf(displayName(profile?.full_name))}</AvatarFallback>
+                </Avatar>
+                <div className="min-w-0">
+                  <div className="font-semibold truncate">{profile?.full_name ?? "Founder"}</div>
+                  {profile?.headline && <div className="text-xs text-muted-foreground">{profile.headline}</div>}
+                </div>
+              </div>
+              {user?.id !== idea.user_id && (
+                <Button variant="outline" className="w-full mt-4" size="sm" onClick={messageFounder}><MessageSquare className="h-3.5 w-3.5 mr-1" /> Message</Button>
+              )}
             </Card>
           </div>
         </div>
+
+        <PitchAccessCard idea={idea} userId={user?.id} role={role} />
       </div>
+      {user && (
+        <SendProposalDialog open={proposalOpen} onOpenChange={setProposalOpen} idea={idea} investorId={user.id} />
+      )}
     </AppShell>
   );
 };

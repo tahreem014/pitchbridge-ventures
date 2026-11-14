@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { useAuth } from "@/hooks/useAuth";
+import { useUnreadMessages } from "@/hooks/useUnreadMessages";
+import { AgreementStatus, formatMoney, isCommitted } from "@/lib/portfolio";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,17 +31,36 @@ const Stat = ({ icon: Icon, label, value, accent }: any) => (
 
 const Dashboard = () => {
   const { user, role } = useAuth();
-  const [counts, setCounts] = useState({ ideas: 0, favs: 0, msgs: 0 });
+  const [counts, setCounts] = useState({ ideas: 0, favs: 0 });
+  const [money, setMoney] = useState(0);
+  const unreadMessages = useUnreadMessages();
+
+  // Investors: money in signed deals (accepted proposals whose agreement both sides confirmed). Founders: funding raised
+  // across their ideas. Zero when there is none.
+  useEffect(() => {
+    if (!user || !role) return;
+    (async () => {
+      if (role === "investor") {
+        const { data } = await supabase.from("proposals").select("amount, status, agreements(status)").eq("investor_id", user.id).eq("status", "accepted");
+        setMoney((data ?? []).reduce((total, row) => {
+          const agreement = Array.isArray(row.agreements) ? row.agreements[0] : row.agreements;
+          return isCommitted({ status: row.status, agreementStatus: (agreement?.status as AgreementStatus | undefined) ?? null }) ? total + Number(row.amount) : total;
+        }, 0));
+      } else {
+        const { data } = await supabase.from("ideas").select("funding_raised").eq("user_id", user.id);
+        setMoney((data ?? []).reduce((total, row) => total + Number(row.funding_raised), 0));
+      }
+    })();
+  }, [user, role]);
 
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const [ideas, favs, msgs] = await Promise.all([
+      const [ideas, favs] = await Promise.all([
         supabase.from("ideas").select("id", { count: "exact", head: true }).eq("user_id", user.id),
         supabase.from("favorites").select("id", { count: "exact", head: true }).eq("user_id", user.id),
-        supabase.from("messages").select("id", { count: "exact", head: true }).eq("recipient_id", user.id),
       ]);
-      setCounts({ ideas: ideas.count ?? 0, favs: favs.count ?? 0, msgs: msgs.count ?? 0 });
+      setCounts({ ideas: ideas.count ?? 0, favs: favs.count ?? 0 });
     })();
   }, [user]);
 
@@ -70,8 +91,8 @@ const Dashboard = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Stat icon={Lightbulb} label={isInvestor ? "Saved ideas" : "My ideas"} value={isInvestor ? counts.favs : counts.ideas} accent="bg-gradient-primary" />
           <Stat icon={Eye} label="Profile views" value="1,284" accent="bg-gradient-accent" />
-          <Stat icon={MessageSquare} label="Messages" value={counts.msgs} accent="bg-primary" />
-          <Stat icon={DollarSign} label={isInvestor ? "Invested" : "Raised"} value="$42.5K" accent="bg-accent" />
+          <Stat icon={MessageSquare} label="Unread messages" value={unreadMessages} accent="bg-primary" />
+          <Stat icon={DollarSign} label={isInvestor ? "Invested" : "Raised"} value={formatMoney(money)} accent="bg-accent" />
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">

@@ -45,7 +45,7 @@ const Explore = () => {
             <Link to="/about" className="text-muted-foreground hover:text-foreground">About</Link>
             <Link to="/pricing" className="text-muted-foreground hover:text-foreground">Pricing</Link>
           </nav>
-          <Button onClick={() => navigate(user ? "/app" : "/auth")} className="bg-gradient-primary">{user ? "Open app" : "Sign in"}</Button>
+          <Button onClick={() => navigate(user ? "/app" : "/auth")} className="bg-gradient-primary">{user ? "Dashboard" : "Sign in"}</Button>
         </div>
       </header>
 

@@ -16,10 +16,6 @@ export const Placeholder = ({ title, desc }: { title: string; desc: string }) =>
   </AppShell>
 );
 
-export const Messages = () => <Placeholder title="Messages" desc="Real-time chat between founders and investors is coming next. Saved to roadmap." />;
-export const Proposals = () => <Placeholder title="Proposals" desc="Send, accept, counter, or reject investment proposals — coming next." />;
-export const Analytics = () => <Placeholder title="Analytics" desc="Deep insights into pitch performance, viewer demographics, and conversion." />;
-export const Portfolio = () => <Placeholder title="Portfolio" desc="Track your investments, valuations, and returns in one elegant view." />;
 export const AdminUsers = () => <Placeholder title="User Moderation" desc="Review users, manage roles, and handle account actions." />;
 export const AdminIdeas = () => <Placeholder title="Idea Approvals" desc="Approve, reject, or flag pitches awaiting moderation." />;
 export const AdminReports = () => <Placeholder title="Reports" desc="Investigate user-submitted reports across the platform." />;

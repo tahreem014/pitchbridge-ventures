@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/Logo";
 import { useAuth } from "@/hooks/useAuth";
+import { forgetSignupRole, rememberSignupRole } from "@/lib/signupRole";
 import { toast } from "sonner";
 import { Rocket, TrendingUp, Loader2, MailCheck } from "lucide-react";
 import { z } from "zod";
@@ -35,16 +36,26 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
 
   useEffect(() => { if (user) navigate("/app"); }, [user, navigate]);
+  // Coming back here means a previous Google attempt was abandoned.
+  useEffect(() => { forgetSignupRole(); }, []);
 
   const handleGoogle = async () => {
+    setGoogleLoading(true);
+    // Only a sign-up carries a role choice; a plain sign-in must not touch roles.
+    if (mode === "signup") rememberSignupRole(role); else forgetSignupRole();
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${window.location.origin}/app` },
     });
-    if (error) toast.error(error.message);
+    if (error) {
+      forgetSignupRole();
+      setGoogleLoading(false);
+      toast.error(error.message);
+    }
   };
 
   const handleForgot = async (e: React.FormEvent) => {
@@ -180,8 +191,8 @@ const Auth = () => {
                 </div>
               )}
 
-              <Button type="button" variant="outline" onClick={handleGoogle} className="w-full mt-6 h-11 gap-2">
-                <GoogleIcon /> Continue with Google
+              <Button type="button" variant="outline" onClick={handleGoogle} disabled={googleLoading || loading} className="w-full mt-6 h-11 gap-2">
+                {googleLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />} Continue with Google
               </Button>
 
               <div className="relative my-6">

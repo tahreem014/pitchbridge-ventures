@@ -18,7 +18,14 @@ import IdeaDetail from "./pages/app/IdeaDetail";
 import Discover from "./pages/app/Discover";
 import Saved from "./pages/app/Saved";
 import Profile from "./pages/app/Profile";
-import { Messages, Proposals, Analytics, Portfolio, AdminUsers, AdminIdeas, AdminReports } from "./pages/app/Placeholder";
+import Messages from "./pages/app/Messages";
+import Portfolio from "./pages/app/Portfolio";
+import Analytics from "./pages/app/Analytics";
+import Proposals from "./pages/app/Proposals";
+import Access from "./pages/app/Access";
+import Agreements from "./pages/app/Agreements";
+import AgreementDetail from "./pages/app/AgreementDetail";
+import { AdminUsers, AdminIdeas, AdminReports } from "./pages/app/Placeholder";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,9 +53,12 @@ const App = () => (
             <Route path="/app/ideas/:id" element={<RequireAuth><IdeaDetail /></RequireAuth>} />
             <Route path="/app/discover" element={<RequireAuth><Discover /></RequireAuth>} />
             <Route path="/app/saved" element={<RequireAuth><Saved /></RequireAuth>} />
+            <Route path="/app/access" element={<RequireAuth><Access /></RequireAuth>} />
             <Route path="/app/messages" element={<RequireAuth><Messages /></RequireAuth>} />
             <Route path="/app/proposals" element={<RequireAuth><Proposals /></RequireAuth>} />
-            <Route path="/app/analytics" element={<RequireAuth><Analytics /></RequireAuth>} />
+            <Route path="/app/agreements" element={<RequireAuth><Agreements /></RequireAuth>} />
+            <Route path="/app/agreements/:id" element={<RequireAuth><AgreementDetail /></RequireAuth>} />
+            <Route path="/app/analytics" element={<RequireAuth roles={["entrepreneur","admin"]}><Analytics /></RequireAuth>} />
             <Route path="/app/portfolio" element={<RequireAuth roles={["investor","admin"]}><Portfolio /></RequireAuth>} />
             <Route path="/app/admin/users" element={<RequireAuth roles={["admin"]}><AdminUsers /></RequireAuth>} />
             <Route path="/app/admin/ideas" element={<RequireAuth roles={["admin"]}><AdminIdeas /></RequireAuth>} />

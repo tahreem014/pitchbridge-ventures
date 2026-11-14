@@ -1,1 +1,4 @@
-project_id = "ulttjfwoilmxrexffqfu"
+project_id = "mjonmpktamzepyooplmn"
+
+[functions.pitch-document]
+verify_jwt = true
